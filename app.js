@@ -4,7 +4,7 @@ const menuRouter = require('./routes/menu.routes');
 const logger = require('./middlewares/logger');
 const conectarDB = require('./database/connection');
 const authRouter = require('./routes/auth.routes');
-import cors from 'cors'
+const cors = require('cors');
 const app = express();
 
 app.use(cors())
