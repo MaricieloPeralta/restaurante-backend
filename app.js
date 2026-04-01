@@ -32,7 +32,7 @@ if (process.env.NODE_ENV !== 'test') {
     conectarDB();
 }
 
-const {port} = require('./config');
+const { port } = require('./config');
 
 app.use(express.json());
 app.use(logger); // ← se ejecuta en TODAS las peticiones
