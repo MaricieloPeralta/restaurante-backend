@@ -29,7 +29,7 @@ app.use(cors({
 
 
 if (process.env.NODE_ENV !== 'test') {
-    conectarDB();
+  conectarDB();
 }
 
 const { port } = require('./config');
@@ -42,17 +42,17 @@ app.use('/auth', authRouter);
 
 // Ruta de bienvenida
 app.get('/', (req, res) => {
-    res.status(200).json({
-        mensaje: 'Restaurante Node API',
-        version: '2.0.0',
-        rutas: ['/menu']
-    });
+  res.status(200).json({
+    mensaje: 'Restaurante Node API',
+    version: '2.0.0',
+    rutas: ['/menu']
+  });
 });
 
 module.exports = app;
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(port, () => {
-        console.log(`Restaurante corriendo en http://localhost:${port}`);
-    });
+  app.listen(port, () => {
+    console.log(`Restaurante corriendo en http://localhost:${port}`);
+  });
 }
 
