@@ -7,7 +7,26 @@ const authRouter = require('./routes/auth.routes');
 const cors = require('cors');
 const app = express();
 
-app.use(cors());
+
+const allowedOrigins = [
+  'http://localhost:5173',     // desarrollo local
+  'http://localhost:3000',     // desarrollo alternativo
+  process.env.FRONTEND_URL,   // producción — URL de Vercel
+].filter(Boolean);            // elimina undefined si FRONTEND_URL no está
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Permitir peticiones sin origin (Thunder Client, Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS bloqueado: ${origin} no está permitido`));
+    }
+  },
+  credentials: true,   // necesario para enviar cookies y headers de auth
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+}));
+
 
 if (process.env.NODE_ENV !== 'test') {
     conectarDB();
